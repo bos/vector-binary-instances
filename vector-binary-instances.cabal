@@ -34,7 +34,8 @@ Description:
    > Chunk "\US\139\b\NUL\NUL\N...\229\240,\254:\NUL\NUL\NUL" Empty
 
 -- URL for the project homepage or repository.
-Homepage:            http://code.haskell.org/~dons/code/binary-vector-instances
+Homepage:            https://github.com/bos/vector-binary-instances
+bug-reports:         https://github.com/bos/vector-binary-instances/issues
 
 -- The license under which the package is released.
 License:             BSD3
@@ -47,7 +48,7 @@ Author:              Don Stewart
 
 -- An email address to which users can send suggestions, bug reports,
 -- and patches.
-Maintainer:          dons00@gmail.com
+Maintainer:          dons00@gmail.com, bos@serpentine.com
 
 -- A copyright notice.
 -- Copyright:
@@ -64,7 +65,7 @@ Build-type:          Simple
 -- Extra-source-files:
 
 -- Constraint on the version of Cabal needed to build this package.
-Cabal-version:       >=1.2
+Cabal-version:       >=1.6
 
 
 Library
@@ -79,3 +80,7 @@ Library
     vector >= 0.6,
     binary,
     cereal
+
+source-repository head
+  type:     git
+  location: https://github.com/bos/vector-binary-instances
