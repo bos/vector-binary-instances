@@ -50,7 +50,7 @@ instance (Storable a, Serialize a) => Serialize (S.Vector a) where
     {-# INLINE get #-}
 
 ------------------------------------------------------------------------
-    
+
 -- this is morally sound, if very awkward.
 -- all effects are contained, and can't escape the unsafeFreeze
 getGeneric :: (G.Vector v a, Serialize a) => Get (v a)
@@ -72,13 +72,13 @@ getGeneric = do
     fill 0
 
     lift $ G.unsafeFreeze mv
-    
+
 -- | Generic put for anything in the G.Vector class.
 putGeneric :: (G.Vector v a, Serialize a) => v a -> Put
 {-# INLINE putGeneric #-}
 putGeneric v = do
     put (G.length v)
-    mapM_ put (G.toList v)
+    G.mapM_ put v
 
 lift :: IO b -> Get b
 lift = return .unsafePerformIO
