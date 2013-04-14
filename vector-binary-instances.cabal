@@ -7,19 +7,19 @@ Name:                vector-binary-instances
 -- The package version. See the Haskell package versioning policy
 -- (http://www.haskell.org/haskellwiki/Package_versioning_policy) for
 -- standards guiding when and how versions should be incremented.
-Version:             0.2
+Version:             0.2.1.0
 
 -- A short (one-line) description of the package.
 Synopsis:            Instances of Data.Binary and Data.Serialize for vector
 
 -- A longer description of the package.
-Description:         
+Description:
    Instances for Binary for the types defined in the vector package,
    making it easy to serialize vectors to and from disk. We use the
    generic interface to vectors, so all vector types are supported.
    Specific instances are provided for unboxed, boxed and storable
    vectors.
-   . 
+   .
    To serialize a vector:
    .
    > *Data.Vector.Binary> let v = Data.Vector.fromList [1..10]
@@ -27,12 +27,12 @@ Description:
    > fromList [1,2,3,4,5,6,7,8,9,10] :: Data.Vector.Vector
    > *Data.Vector.Binary> encode v
    > Chunk "\NUL\NUL\NUL\NUL\NUL...\NUL\NUL\NUL\t\NUL\NUL\NUL\NUL\n" Empty
-   . 
+   .
    Which you can in turn compress before writing to disk:
    .
    > compress . encode $ v
    > Chunk "\US\139\b\NUL\NUL\N...\229\240,\254:\NUL\NUL\NUL" Empty
-  
+
 -- URL for the project homepage or repository.
 Homepage:            http://code.haskell.org/~dons/code/binary-vector-instances
 
@@ -50,7 +50,7 @@ Author:              Don Stewart
 Maintainer:          dons00@gmail.com
 
 -- A copyright notice.
--- Copyright:           
+-- Copyright:
 
 -- Stability of the pakcage (experimental, provisional, stable...)
 Stability:           Experimental
@@ -61,7 +61,7 @@ Build-type:          Simple
 
 -- Extra files to be distributed with the package, such as examples or
 -- a README.
--- Extra-source-files:  
+-- Extra-source-files:
 
 -- Constraint on the version of Cabal needed to build this package.
 Cabal-version:       >=1.2
@@ -69,13 +69,13 @@ Cabal-version:       >=1.2
 
 Library
   -- Modules exported by the library.
-  Exposed-modules:     
+  Exposed-modules:
     Data.Vector.Binary,
     Data.Vector.Cereal
-  
+
   -- Packages needed in order to build this package.
-  Build-depends:       
+  Build-depends:
     base > 3 && < 6,
-    vector >= 0.5,
+    vector >= 0.6,
     binary,
     cereal
