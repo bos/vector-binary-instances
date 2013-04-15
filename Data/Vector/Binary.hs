@@ -33,15 +33,12 @@
 module Data.Vector.Binary () where
 
 import Data.Binary
-import Control.Monad
 
 import qualified Data.Vector.Generic as G
 import qualified Data.Vector.Unboxed as U
 import qualified Data.Vector.Storable as S
 import Data.Vector (Vector)
 
-import System.IO.Unsafe
-import qualified Data.Vector.Generic.Mutable as M
 import Foreign.Storable (Storable)
 
 -- Enumerate the instances to avoid the nasty overlapping instances.
@@ -66,27 +63,11 @@ instance (Storable a, Binary a) => Binary (S.Vector a) where
 
 ------------------------------------------------------------------------
 
--- this is morally sound, if very awkward.
--- all effects are contained, and can't escape the unsafeFreeze
 getGeneric :: (G.Vector v a, Binary a) => Get (v a)
 {-# INLINE getGeneric #-}
 getGeneric = do
     n  <- get
-
-    -- new unitinialized array
-    mv <- lift $ M.new n
-
-    let fill i
-            | i < n = do
-                x <- get
-                (unsafePerformIO $ M.unsafeWrite mv i x) `seq` return ()
-                fill (i+1)
-
-            | otherwise = return ()
-
-    fill 0
-
-    lift $ G.unsafeFreeze mv
+    G.replicateM n get
 
 -- | Generic put for anything in the G.Vector class.
 putGeneric :: (G.Vector v a, Binary a) => v a -> Put
@@ -94,6 +75,3 @@ putGeneric :: (G.Vector v a, Binary a) => v a -> Put
 putGeneric v = do
     put (G.length v)
     G.mapM_ put v
-
-lift :: IO b -> Get b
-lift = return .unsafePerformIO
