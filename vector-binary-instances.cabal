@@ -72,14 +72,12 @@ Library
   -- Modules exported by the library.
   Exposed-modules:
     Data.Vector.Binary,
-    Data.Vector.Cereal
 
   -- Packages needed in order to build this package.
   Build-depends:
     base > 3 && < 6,
     vector >= 0.6,
-    binary,
-    cereal
+    binary
 
 source-repository head
   type:     git
