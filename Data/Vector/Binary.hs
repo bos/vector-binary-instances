@@ -34,9 +34,10 @@ module Data.Vector.Binary () where
 
 import Data.Binary
 
-import qualified Data.Vector.Generic as G
-import qualified Data.Vector.Unboxed as U
-import qualified Data.Vector.Storable as S
+import qualified Data.Vector.Generic   as G
+import qualified Data.Vector.Unboxed   as U
+import qualified Data.Vector.Storable  as S
+import qualified Data.Vector.Primitive as P
 import Data.Vector (Vector)
 
 import Foreign.Storable (Storable)
@@ -51,6 +52,12 @@ instance Binary a => Binary (Vector a) where
 
 -- | Unboxed vectors
 instance (U.Unbox a, Binary a) => Binary (U.Vector a) where
+    put = putGeneric
+    get = getGeneric
+    {-# INLINE get #-}
+
+-- | Primitive vectors
+instance (P.Prim a, Binary a) => Binary (P.Vector a) where
     put = putGeneric
     get = getGeneric
     {-# INLINE get #-}
