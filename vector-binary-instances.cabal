@@ -69,6 +69,7 @@ Cabal-version:       >=1.6
 
 
 Library
+  Ghc-options: -Wall
   -- Modules exported by the library.
   Exposed-modules:
     Data.Vector.Binary,
