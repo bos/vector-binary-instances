@@ -1,5 +1,3 @@
-{-# LANGUAGE FlexibleInstances    #-}
-{-# LANGUAGE UndecidableInstances #-}
 --------------------------------------------------------------------
 -- |
 -- Module    : Data.Vector.Binary
