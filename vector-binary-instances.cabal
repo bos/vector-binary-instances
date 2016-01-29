@@ -45,7 +45,7 @@ Library
   Ghc-options: -Wall
   -- Modules exported by the library.
   Exposed-modules:
-    Data.Vector.Binary,
+    Data.Vector.Binary
 
   -- Packages needed in order to build this package.
   Build-depends:
