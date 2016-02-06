@@ -1,5 +1,5 @@
 Name:                vector-binary-instances
-Version:             0.2.1.0
+Version:             0.2.1.1
 Synopsis:            Instances of Data.Binary and Data.Serialize for vector
 Description:
    Instances for Binary for the types defined in the vector package,
