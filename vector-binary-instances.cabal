@@ -27,7 +27,7 @@ bug-reports:         https://github.com/bos/vector-binary-instances/issues
 License:             BSD3
 License-file:        LICENSE
 Author:              Don Stewart
-Maintainer:          dons00@gmail.com, bos@serpentine.com
+Maintainer:          dons00@gmail.com, bos@serpentine.com, Ben Gamari <ben@smart-cactus.org>
 
 -- A copyright notice.
 -- Copyright:
