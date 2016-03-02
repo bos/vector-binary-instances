@@ -36,6 +36,13 @@ naiveGet' = do
 
 type V = BS.ByteString -> U.Vector Int
 
+benchGetSize :: String -> BS.ByteString -> Benchmark
+benchGetSize name bs = bgroup name
+    [ bench "U.Vector Int"                 $ nf (decode :: V) bs
+    , bench "naive U.Vector Int"           $ nf (runGet naiveGet :: V) bs
+    , bench "noinline naive U.Vector Int"  $ nf (runGet naiveGet' :: V) bs
+    ]
+
 main = defaultMain
   [ bgroup "encode"
     [ bench "U.Vector Int 3"      $ nf encode vec1
@@ -45,23 +52,11 @@ main = defaultMain
     , bench "U.Vector Int 300000" $ nf encode vec5
     ]
   , bgroup "decode"
-    [ bench "U.Vector Int 3"      $ nf (decode :: V) bs1
-    , bench "U.Vector Int 30"     $ nf (decode :: V) bs2
-    , bench "U.Vector Int 300"    $ nf (decode :: V) bs3
-    , bench "U.Vector Int 30000"  $ nf (decode :: V) bs4
-    , bench "U.Vector Int 300000" $ nf (decode :: V) bs5
-
-    , bench "naive U.Vector Int 3"      $ nf (runGet naiveGet :: V) bs1
-    , bench "naive U.Vector Int 30"     $ nf (runGet naiveGet :: V) bs2
-    , bench "naive U.Vector Int 300"    $ nf (runGet naiveGet :: V) bs3
-    , bench "naive U.Vector Int 30000"  $ nf (runGet naiveGet :: V) bs4
-    , bench "naive U.Vector Int 300000" $ nf (runGet naiveGet :: V) bs5
-
-    , bench "noinline naive U.Vector Int 3"      $ nf (runGet naiveGet' :: V) bs1
-    , bench "noinline naive U.Vector Int 30"     $ nf (runGet naiveGet' :: V) bs2
-    , bench "noinline naive U.Vector Int 300"    $ nf (runGet naiveGet' :: V) bs3
-    , bench "noinline naive U.Vector Int 30000"  $ nf (runGet naiveGet' :: V) bs4
-    , bench "noinline naive U.Vector Int 300000" $ nf (runGet naiveGet' :: V) bs5
+    [ benchGetSize "size=3" bs1
+    , benchGetSize "size=30" bs2
+    , benchGetSize "size=300" bs3
+    , benchGetSize "size=30000" bs4
+    , benchGetSize "size=300000" bs5
     ]
   ]
 
