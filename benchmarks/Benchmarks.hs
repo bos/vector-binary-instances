@@ -26,6 +26,14 @@ naiveGet = do
     n <- get
     U.replicateM n get
 
+naiveGet' :: (Binary a, U.Unbox a) => Get (U.Vector a)
+naiveGet' = do
+    n <- get
+    U.replicateM n get
+-- A feeble attempt at simulating what will happen if we end up with a situation
+-- where we are unable to specialize to the element type
+{-# NOINLINE naiveGet' #-}
+
 type V = BS.ByteString -> U.Vector Int
 
 main = defaultMain
@@ -48,6 +56,12 @@ main = defaultMain
     , bench "naive U.Vector Int 300"    $ nf (runGet naiveGet :: V) bs3
     , bench "naive U.Vector Int 30000"  $ nf (runGet naiveGet :: V) bs4
     , bench "naive U.Vector Int 300000" $ nf (runGet naiveGet :: V) bs5
+
+    , bench "noinline naive U.Vector Int 3"      $ nf (runGet naiveGet' :: V) bs1
+    , bench "noinline naive U.Vector Int 30"     $ nf (runGet naiveGet' :: V) bs2
+    , bench "noinline naive U.Vector Int 300"    $ nf (runGet naiveGet' :: V) bs3
+    , bench "noinline naive U.Vector Int 30000"  $ nf (runGet naiveGet' :: V) bs4
+    , bench "noinline naive U.Vector Int 300000" $ nf (runGet naiveGet' :: V) bs5
     ]
   ]
 
