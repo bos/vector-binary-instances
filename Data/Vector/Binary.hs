@@ -45,10 +45,12 @@ module Data.Vector.Binary (
 import Data.Binary
 
 import qualified Data.Vector.Generic   as G
+import qualified Data.Vector.Generic.Mutable as GM
 import qualified Data.Vector.Unboxed   as U
 import qualified Data.Vector.Storable  as S
 import qualified Data.Vector.Primitive as P
 import Data.Vector (Vector)
+import System.IO.Unsafe
 
 import Foreign.Storable (Storable)
 
@@ -87,8 +89,14 @@ genericGetVectorWith :: (G.Vector v a, Binary a)
     -> Get (v a)
 {-# INLINE genericGetVectorWith #-}
 genericGetVectorWith getN getA = do
-    n  <- getN
-    G.replicateM n getA
+    n <- getN
+    v <- return $ unsafePerformIO $ GM.unsafeNew n
+    let go 0 = return ()
+        go i = do x <- getA
+                  () <- return $ unsafePerformIO $ GM.unsafeWrite v (i-1) x
+                  go (i-1)
+    () <- go n
+    return $ unsafePerformIO $ G.unsafeFreeze v
 
 -- | Generic put for anything in the G.Vector class which uses custom
 --   encoders.
