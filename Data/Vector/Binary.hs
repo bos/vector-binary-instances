@@ -93,7 +93,7 @@ genericGetVectorWith getN getA = do
     v <- return $ unsafePerformIO $ GM.unsafeNew n
     let go 0 = return ()
         go i = do x <- getA
-                  () <- return $ unsafePerformIO $ GM.unsafeWrite v (i-1) x
+                  () <- return $ unsafePerformIO $ GM.unsafeWrite v (n-i) x
                   go (i-1)
     () <- go n
     return $ unsafePerformIO $ G.unsafeFreeze v
