@@ -7,6 +7,10 @@ import qualified Data.ByteString.Lazy     as BS
 import qualified Data.Vector.Unboxed as U
 import Data.Vector.Binary
 
+-- We take care to avoid using the @Binary@ instances here to avoid issues with
+-- overlapping instances as the install plan will involve two different versions
+-- of k@vector-binary-instances@ (as @Criterion@ transitively depends upon
+-- @vector-binary-instances@). See #7 for details.
 
 vec1,vec2,vec3,vec4,vec5 :: U.Vector Int
 vec1 = U.enumFromN 0 3
