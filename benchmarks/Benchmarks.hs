@@ -1,3 +1,5 @@
+{-# LANGUAGE CPP #-}
+
 import Criterion.Main
 import Data.Binary
 import Data.Binary.Get
@@ -6,6 +8,15 @@ import Data.Binary.Put
 import qualified Data.ByteString.Lazy     as BS
 import qualified Data.Vector.Unboxed as U
 import Data.Vector.Binary
+
+#if !(MIN_VERSION_bytestring(0,10,0))
+import Control.DeepSeq (NFData(..))
+import qualified Data.ByteString.Lazy.Internal as BS
+
+instance NFData BS.ByteString where
+    rnf BS.Empty       = ()
+    rnf (BS.Chunk _ b) = rnf b
+#endif
 
 -- We take care to avoid using the @Binary@ instances here to avoid issues with
 -- overlapping instances as the install plan will involve two different versions
