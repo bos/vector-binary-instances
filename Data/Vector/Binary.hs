@@ -83,7 +83,7 @@ instance (Storable a, Binary a) => Binary (S.Vector a) where
 ------------------------------------------------------------------------
 
 -- | Deserialize vector using custom parsers.
-genericGetVectorWith :: (G.Vector v a, Binary a)
+genericGetVectorWith :: G.Vector v a
     => Get Int       -- ^ Parser for vector size
     -> Get a         -- ^ Parser for vector's element
     -> Get (v a)
@@ -100,7 +100,7 @@ genericGetVectorWith getN getA = do
 
 -- | Generic put for anything in the G.Vector class which uses custom
 --   encoders.
-genericPutVectorWith :: (G.Vector v a, Binary a)
+genericPutVectorWith :: G.Vector v a
     => (Int -> Put)  -- ^ Encoder for vector size
     -> (a   -> Put)  -- ^ Encoder for vector's element
     -> v a -> Put
