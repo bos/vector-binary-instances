@@ -1,6 +1,6 @@
 Name:                vector-binary-instances
 Version:             0.2.4
-Synopsis:            Instances of Data.Binary and Data.Serialize for vector
+Synopsis:            Instances of Data.Binary for vector
 Description:
    Instances for Binary for the types defined in the vector package,
    making it easy to serialize vectors to and from disk. We use the
@@ -20,6 +20,9 @@ Description:
    .
    > compress . encode $ v
    > Chunk "\US\139\b\NUL\NUL\N...\229\240,\254:\NUL\NUL\NUL" Empty
+   .
+   Try the cereal-vector package if you are looking for Data.Serialize
+   instances.
 
 -- URL for the project homepage or repository.
 Homepage:            https://github.com/bos/vector-binary-instances
