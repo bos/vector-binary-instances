@@ -55,7 +55,7 @@ Library
   Build-depends:
     base > 3 && < 4.13,
     vector >= 0.6 && < 0.13,
-    binary >= 0.5 && < 0.10
+    binary >= 0.5 && < 0.11
 
 Benchmark benchmarks
   Type:           exitcode-stdio-1.0
