@@ -61,12 +61,12 @@ Benchmark benchmarks
   Type:           exitcode-stdio-1.0
   Main-is:        Benchmarks.hs
   Build-depends:
-    base,
+    base >= 4.7,
     vector-binary-instances,
     vector,
     bytestring,
     binary,
-    criterion,
+    gauge,
     deepseq
   hs-source-dirs: benchmarks
 
