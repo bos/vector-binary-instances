@@ -3,7 +3,7 @@
 import Data.Binary
 import Data.Binary.Get
 import Data.Binary.Put
-import Gauge.Main
+import Test.Tasty.Bench
 
 import qualified Data.ByteString.Lazy     as BS
 import qualified Data.Vector.Unboxed as U
