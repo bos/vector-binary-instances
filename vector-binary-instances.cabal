@@ -1,3 +1,4 @@
+Cabal-version:       3.0
 Name:                vector-binary-instances
 Version:             0.2.5.2
 Synopsis:            Instances of Data.Binary for vector
@@ -27,23 +28,14 @@ Description:
 -- URL for the project homepage or repository.
 Homepage:            https://github.com/bos/vector-binary-instances
 bug-reports:         https://github.com/bos/vector-binary-instances/issues
-License:             BSD3
+License:             BSD-3-Clause
 License-file:        LICENSE
 Author:              Don Stewart
 Maintainer:          dons00@gmail.com, bos@serpentine.com, Ben Gamari <ben@smart-cactus.org>
 Tested-With:         GHC==8.10.1, GHC==8.8.3, GHC==8.6.5, GHC==8.0.2, GHC==7.10.3, GHC==7.8.4, GHC==7.6.3, GHC==7.4.2
-
--- A copyright notice.
--- Copyright:
-
--- Stability of the pakcage (experimental, provisional, stable...)
 Stability:           Experimental
 Category:            Data
 Build-type:          Simple
-
--- Constraint on the version of Cabal needed to build this package.
-Cabal-version:       >=1.8
-
 
 Library
   Ghc-options: -Wall
@@ -56,6 +48,7 @@ Library
     base > 3 && < 4.16,
     vector >= 0.6 && < 0.13,
     binary >= 0.5 && < 0.11
+  Default-Language: Haskell2010
 
 Benchmark benchmarks
   Type:           exitcode-stdio-1.0
@@ -69,6 +62,7 @@ Benchmark benchmarks
     tasty-bench,
     deepseq
   hs-source-dirs: benchmarks
+  Default-Language: Haskell2010
 
 Test-Suite tests
   Type:           exitcode-stdio-1.0
@@ -80,6 +74,7 @@ Test-Suite tests
     binary,
     tasty,
     tasty-quickcheck
+  Default-Language: Haskell2010
 
 source-repository head
   type:     git
