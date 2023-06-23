@@ -1,0 +1,3 @@
+branches: master ci-*
+benchmarks: >=7.8
+haddock: >=7.8
